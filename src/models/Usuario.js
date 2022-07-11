@@ -1,6 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from '../db/db.js';
-import { UsuarioRol } from './UsuarioRol.js';
 
 export const Usuario = sequelize.define('usuarios', {
     id: {
@@ -53,13 +52,8 @@ Usuario.associate = function(models) {
     });
     Usuario.belongsToMany(models.Rol, {
         as: 'roles',
-        through: UsuarioRol,
+        through: 'usuarioRoles',
         foreignKey: 'usuarioId',
         otherKey: 'rolId'
     });
-    UsuarioRol.associate = function(models) {
-        Usuario.belongsToMany(models.Rol, { through: UsuarioRol });
-        Rol.belongsToMany(models.Usuario, { through: UsuarioRol });
-    }
-    
 };
