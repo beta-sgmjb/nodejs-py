@@ -13,8 +13,9 @@ export const auth = (req, res, next) => {
             } else {
                 console.log(decoded.usuario);
                 Usuario.findByPk(decoded.usuario.id, { include: "roles" }).then(usuario => {
+                    console.log(usuario.roles)
                     req.usuario = usuario;
-                })
+                });
                 next();
             }
         });

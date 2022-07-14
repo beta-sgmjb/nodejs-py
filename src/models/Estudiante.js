@@ -1,7 +1,8 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import { sequelize } from '../db/db.js';
+import { Usuario } from "./Usuario.js";
 
-export const Estudiante = sequelize.define('estudiante', {
+export const Estudiante = sequelize.define('estudiantes', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -10,22 +11,14 @@ export const Estudiante = sequelize.define('estudiante', {
     nombre: {
         type: DataTypes.STRING,
     },
-    usuarioId: {
+    idUsuario: {
         type: DataTypes.INTEGER,
         references: {
             model: "usuarios",
             key: "id"
         },
-        onDelete: "CASCADE"
+        allowNull: true
     }
 }, {
     tableName: 'estudiantes'
 });
-
-Estudiante.associate = function(models) {
-    Estudiante.hasOne(models.Usuario, {
-        as: 'usuarios',
-        foreignKey: 'usuarioId',
-        sourceKey: 'id'
-    });
-};

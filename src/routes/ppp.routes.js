@@ -1,13 +1,13 @@
 import { Router } from "express";
-import { getPpps, createPpp, updatePpp, deletePpp, getPpp } from '../controllers/ppp.controller.js';
+import { getPpps, createPpp, updatePpp, deletePpp, getPpp, find } from '../controllers/ppp.controller.js';
 import { auth } from '../middlewares/auth.js';
 
 const router = Router();
 
-router.get('/ppps', auth, getPpps);
-router.post('/ppps', auth, createPpp);
-router.put('/ppps/:id', auth, updatePpp);
-router.delete('/ppps/:id', auth, deletePpp);
-router.get('/ppps/:id', auth, getPpp);
+router.get('/api/ppps', auth, getPpps);
+router.post('/api/ppps', auth, createPpp);
+router.put('/api/ppps/:id', auth, find, updatePpp);
+router.delete('/api/ppps/:id', auth, find, deletePpp);
+router.get('/api/ppps/:id', auth, find, getPpp);
 
 export default router;

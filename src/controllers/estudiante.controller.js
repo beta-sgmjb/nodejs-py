@@ -11,10 +11,10 @@ export const getEstudiantes = async (req, res) => {
 
 export const createEstudiante = async (req, res) => {
     try {
-        const { nombre, usuarioId } = req.body;
+        const { nombre, idUsuario } = req.body;
         const newEstudiante = await Estudiante.create({
             nombre,
-            usuarioId
+            idUsuario
         });
         res.json(newEstudiante);
     } catch (error) {

@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from '../db/db.js';
 
-export const Ppp = sequelize.define('ppp', {
+export const Ppp = sequelize.define('ppps', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

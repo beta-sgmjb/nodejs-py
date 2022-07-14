@@ -48,3 +48,13 @@ export const signUp = (req, res) => {
         res.status(500).json(err)
     });
 }
+
+export const getUsuarios = async (req, res) => {
+    try {
+        const usuarios = await Usuario.findAll();
+        res.json(usuarios);
+    } catch (error) {
+        return res.status(500).json({ msg: error.message }) 
+    }
+}
+

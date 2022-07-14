@@ -1,5 +1,7 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from '../db/db.js';
+import { Estudiante } from "./Estudiante.js";
+import { Rol } from "./Rol.js";
 
 export const Usuario = sequelize.define('usuarios', {
     id: {
@@ -43,17 +45,18 @@ export const Usuario = sequelize.define('usuarios', {
 }, {
     tableName: 'usuarios'
 });
+Usuario.hasOne(Estudiante, {
+    as: 'usuarios',
+    foreignKey: {
+        name: 'idUsuario' 
+    },
+    sourceKey: 'id'
+});
 
-Usuario.associate = function(models) {
-    Usuario.belongsTo(models.Estudiante, {
-        as: 'estudiantes',
-        foreignKey: 'usuarioId',
-        sourceKey: 'id'
-    });
-    Usuario.belongsToMany(models.Rol, {
-        as: 'roles',
-        through: 'usuarioRoles',
-        foreignKey: 'usuarioId',
-        otherKey: 'rolId'
-    });
-};
+Estudiante.belongsTo(Usuario, {
+    as: 'estudiantes',
+    foreignKey: {
+        name: 'idUsuario' 
+    },
+    sourceKey: 'id'
+});

@@ -1,5 +1,7 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from '../db/db.js';
+import { Rol } from "./Rol.js";
+import { Usuario } from "./Usuario.js";
 
 export const UsuarioRol = sequelize.define('usuarioRoles', {
     id: {
@@ -7,7 +9,7 @@ export const UsuarioRol = sequelize.define('usuarioRoles', {
         primaryKey: true,
         autoIncrement: true
     },
-    usuarioId: {
+    idUsuario: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
@@ -16,7 +18,7 @@ export const UsuarioRol = sequelize.define('usuarioRoles', {
         },
         onDelete: "CASCADE"
     },
-    rolId: {
+    idRol: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

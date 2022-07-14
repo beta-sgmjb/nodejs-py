@@ -8,7 +8,7 @@ import './models/UsuarioRol.js';
 
 async function main() {
     try {
-        await sequelize.sync({ force: true });
+        await sequelize.sync({ force: false });
         console.log('Conexión a base de datos...');
         app.listen(4000);
         console.log('Servidor corriendo...');
