@@ -26,12 +26,13 @@ export const getPpps = async (req, res) => {
 
 export const createPpp = async (req, res) => {
     try {
-        const { nombre } = req.body;
+        const { nombre, idEstudiante } = req.body;
         if (!nombre) {
             res.status(401).json({ msg: "Ingrese datos correctos..." });
         }
         const newPpp = await Ppp.create({
-            nombre
+            nombre,
+            idEstudiante
         });
         res.json(newPpp);
     } catch (error) {

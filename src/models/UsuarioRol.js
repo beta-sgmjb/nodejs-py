@@ -13,7 +13,7 @@ export const UsuarioRol = sequelize.define('usuarioRoles', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: "usuarios",
+            model: Usuario,
             key: "id"
         },
         onDelete: "CASCADE"
@@ -22,11 +22,25 @@ export const UsuarioRol = sequelize.define('usuarioRoles', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: "roles",
+            model: Rol,
             key: "id"
         },
         onDelete: "CASCADE"
     }
 }, {
     tableName: 'usuarioRoles'
+});
+
+Usuario.belongsToMany(Rol, {
+    as: 'roles',
+    through: 'usuarioRoles',
+    foreignKey: 'idUsuario',
+    otherKey: 'idRol'
+});
+
+Rol.belongsToMany(Usuario, {
+    as: 'usuarios',
+    through: 'usuarioRoles',
+    foreignKey: 'idRol',
+    otherKey: 'idUsuario'
 });

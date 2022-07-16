@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from '../db/db.js';
+import { Estudiante } from "./Estudiante.js";
 
 export const Ppp = sequelize.define('ppps', {
     id: {
@@ -9,7 +10,31 @@ export const Ppp = sequelize.define('ppps', {
     },
     nombre: {
         type: DataTypes.STRING,
+    },
+    idEstudiante: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Estudiante,
+            key: "id"
+        },
+        allowNull: false
     }
 }, {
     tableName: 'ppps'
+});
+
+Estudiante.hasOne(Ppp, {
+    as: 'practicante',
+    foreignKey: {
+        name: 'idEstudiante' 
+    },
+    sourceKey: 'id'
+});
+
+Ppp.belongsTo(Estudiante, {
+    as: 'ppps',
+    foreignKey: {
+        name: 'idEstudiante' 
+    },
+    sourceKey: 'id'
 });

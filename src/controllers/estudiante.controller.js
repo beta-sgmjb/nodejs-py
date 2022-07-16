@@ -1,9 +1,10 @@
 import { Estudiante } from '../models/Estudiante.js'
+import { Usuario } from '../models/Usuario.js';
 
 export const getEstudiantes = async (req, res) => {
     try {
         const estudiantes = await Estudiante.findAll();
-        res.json(estudiantes);
+        res.json(estudiantes)
     } catch (error) {
         return res.status(500).json({ msg: error.message }) 
     }
@@ -11,14 +12,17 @@ export const getEstudiantes = async (req, res) => {
 
 export const createEstudiante = async (req, res) => {
     try {
-        const { nombre, idUsuario } = req.body;
+        const { nombre, estado } = req.body;
+        const idUser = await Usuario.max('id');
+        console.log(idUser);
         const newEstudiante = await Estudiante.create({
             nombre,
-            idUsuario
+            estado,
+            idUsuario: idUser
         });
         res.json(newEstudiante);
     } catch (error) {
-        return res.status(500).json({ msg: error.message }) 
+        return res.status(500).json({ msg: error.message });
     }
 }
 
@@ -40,7 +44,7 @@ export const updateEstudiante = async (req, res) => {
 export const deleteEstudiante = async (req, res) => {
     try {
         const { id } = req.params;
-        await Ppp.destroy({
+        await Estudiante.destroy({
             where: {
                 id
             }

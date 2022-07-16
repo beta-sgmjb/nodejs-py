@@ -11,14 +11,33 @@ export const Estudiante = sequelize.define('estudiantes', {
     nombre: {
         type: DataTypes.STRING,
     },
+    estado: {
+        type: DataTypes.CHAR(1)
+    },
     idUsuario: {
         type: DataTypes.INTEGER,
         references: {
-            model: "usuarios",
+            model: Usuario,
             key: "id"
         },
-        allowNull: true
+        allowNull: false
     }
 }, {
     tableName: 'estudiantes'
+});
+
+Usuario.hasOne(Estudiante, {
+    as: 'usuario',
+    foreignKey: {
+        name: 'idUsuario' 
+    },
+    sourceKey: 'id'
+});
+
+Estudiante.belongsTo(Usuario, {
+    as: 'estudiante',
+    foreignKey: {
+        name: 'idUsuario' 
+    },
+    sourceKey: 'id'
 });

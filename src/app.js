@@ -4,10 +4,12 @@ import usuarioRoutes from './routes/usuario.routes.js';
 import estudianteRoutes from './routes/estudiante.routes.js'
 import rolRoutes from './routes/rol.routes.js';
 import usuarioRolRoutes from './routes/usuarioRoles.routes.js';
+import cors from 'cors';
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.use(pppRoutes);
 app.use(usuarioRoutes);

@@ -1,7 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from '../db/db.js';
-import { Estudiante } from "./Estudiante.js";
-import { Rol } from "./Rol.js";
 
 export const Usuario = sequelize.define('usuarios', {
     id: {
@@ -45,18 +43,5 @@ export const Usuario = sequelize.define('usuarios', {
 }, {
     tableName: 'usuarios'
 });
-Usuario.hasOne(Estudiante, {
-    as: 'usuarios',
-    foreignKey: {
-        name: 'idUsuario' 
-    },
-    sourceKey: 'id'
-});
 
-Estudiante.belongsTo(Usuario, {
-    as: 'estudiantes',
-    foreignKey: {
-        name: 'idUsuario' 
-    },
-    sourceKey: 'id'
-});
+
