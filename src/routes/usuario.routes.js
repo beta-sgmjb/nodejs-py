@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { signIn, signUp, getUsuarios } from '../controllers/auth.controller.js';
+import { auth } from "../middlewares/auth.js";
 
 const router = Router();
 router.get('/api/usuarios', getUsuarios);

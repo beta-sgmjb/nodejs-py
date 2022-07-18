@@ -12,13 +12,11 @@ export const getEstudiantes = async (req, res) => {
 
 export const createEstudiante = async (req, res) => {
     try {
-        const { nombre, estado } = req.body;
-        const idUser = await Usuario.max('id');
-        console.log(idUser);
+        const { nombre, estado, idUsuario } = req.body;
         const newEstudiante = await Estudiante.create({
             nombre,
             estado,
-            idUsuario: idUser
+            idUsuario
         });
         res.json(newEstudiante);
     } catch (error) {

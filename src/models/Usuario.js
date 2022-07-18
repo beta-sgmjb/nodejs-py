@@ -44,4 +44,12 @@ export const Usuario = sequelize.define('usuarios', {
     tableName: 'usuarios'
 });
 
-
+export const verificarRol = (roles) => {
+    if (roles['0'].rol === "admin") {
+        return "1";
+    } else if (roles['0'].rol === "supervisor") {
+        return "2";
+    } else {
+        return "3";
+    }
+}

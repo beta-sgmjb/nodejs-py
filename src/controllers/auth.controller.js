@@ -1,6 +1,8 @@
 import { Usuario } from '../models/Usuario.js';
-import bcrypt  from 'bcrypt';
+import { Rol } from '../models/Rol.js';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { UsuarioRol } from '../models/UsuarioRol.js';
 
 export const signIn = (req, res) => {
     const { email, password } = req.body;
@@ -9,19 +11,36 @@ export const signIn = (req, res) => {
             email
         }
     }).then(usuario => {
-        if(!usuario) {
+        if (!usuario) {
             res.status(404).json({ msg: "Usuario no existe..." })
         } else {
-            if(bcrypt.compareSync(password, usuario.password)) {
+
+
+            if (bcrypt.compareSync(password, usuario.password)) {
                 let token = jwt.sign({ usuario: usuario }, "secret", {
                     expiresIn: "7d"
                 });
-                res.json({
-                    usuario,
-                    token
+                Usuario.findOne({
+                    include: {
+                        model: Rol,
+                        as: 'roles'
+                    }                  
+                }).then(result => {
+                    const rolE = result.roles[0].dataValues.rol;
+                    const dataUsuario = {
+                        id: usuario.id,
+                        name: usuario.name,
+                        email: usuario.email,
+                        password: usuario.password,
+                        accessToken: token,
+                        rol: rolE
+                    }
+                    res.send({
+                        dataUsuario
+                    });
                 });
             } else {
-                res.status(401).json({ msg: "Contraseña incorrecta" })
+                res.status(401).json({ msg: "Contraseña incorrecta..." })
             }
         }
     }).catch(err => {
@@ -40,9 +59,24 @@ export const signUp = (req, res) => {
         let token = jwt.sign({ usuario: usuario }, "secret", {
             expiresIn: "7d"
         });
-        res.json({
-            usuario,
-            token
+        Usuario.findOne({
+            include: {
+                model: Rol,
+                as: 'roles'
+            }                  
+        }).then(result => {
+            const rolE = result.roles[0].dataValues.rol;
+            const dataUsuario = {
+                id: usuario.id,
+                name: usuario.name,
+                email: usuario.email,
+                password: usuario.password,
+                accessToken: token,
+                rol: rolE
+            }
+            res.send({
+                dataUsuario
+            });
         });
     }).catch(err => {
         res.status(500).json(err)
@@ -54,7 +88,9 @@ export const getUsuarios = async (req, res) => {
         const usuarios = await Usuario.findAll();
         res.json(usuarios);
     } catch (error) {
-        return res.status(500).json({ msg: error.message }) 
+        return res.status(500).json({ msg: error.message })
     }
 }
+
+
 
