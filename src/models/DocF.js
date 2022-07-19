@@ -1,47 +1,45 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from '../db/db.js';
-import { Persona } from "./Persona.js";
+import { Ppp } from "./Ppp.js";
 
-export const Estudiante = sequelize.define('estudiantes', {
+export const DocF = sequelize.define('docFs', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    ciclo: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-    carreraProfesional: {
+    url: {
         type: DataTypes.STRING,
         allowNull: true
     },
-    estado: {
+    tipoDocumento: {
         type: DataTypes.CHAR(1),
-        allowNull: true
     },
-    idPersona: {
+    estado: {
+        type: DataTypes.CHAR(1)
+    },
+    idPpp: {
         type: DataTypes.INTEGER,
         references: {
-            model: Persona,
+            model: Ppp,
             key: "id"
         },
         allowNull: false
     }
 }, {
-    tableName: 'estudiantes'
+    tableName: 'docFs'
 });
 
-Persona.hasOne(Estudiante, {
+Ppp.hasOne(DocF, {
     foreignKey: {
-        name: 'idPersona' 
+        name: 'idPpp' 
     },
     sourceKey: 'id'
 });
 
-Estudiante.belongsTo(Persona, {
+DocF.belongsTo(Ppp, {
     foreignKey: {
-        name: 'idPersona' 
+        name: 'idPpp' 
     },
     sourceKey: 'id'
 });

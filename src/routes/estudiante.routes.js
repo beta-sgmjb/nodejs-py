@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getEstudiantes, createEstudiante, updateEstudiante, deleteEstudiante, getEstudiante } from '../controllers/estudiante.controller.js';
+import { getEstudiantes, createEstudiante, updateEstudiante, deleteEstudiante, getEstudiante, findEstudiante } from '../controllers/estudiante.controller.js';
 import { auth } from '../middlewares/auth.js';
  
 const router = Router();

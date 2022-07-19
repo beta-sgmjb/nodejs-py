@@ -2,23 +2,14 @@ import { DataTypes, Model } from "sequelize";
 import { sequelize } from '../db/db.js';
 import { Persona } from "./Persona.js";
 
-export const Estudiante = sequelize.define('estudiantes', {
+export const Supervisor = sequelize.define('supervisores', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    ciclo: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-    carreraProfesional: {
-        type: DataTypes.STRING,
-        allowNull: true
-    },
-    estado: {
-        type: DataTypes.CHAR(1),
-        allowNull: true
+    cargo: {
+        type: DataTypes.STRING
     },
     idPersona: {
         type: DataTypes.INTEGER,
@@ -29,17 +20,17 @@ export const Estudiante = sequelize.define('estudiantes', {
         allowNull: false
     }
 }, {
-    tableName: 'estudiantes'
+    tableName: 'supervisores'
 });
 
-Persona.hasOne(Estudiante, {
+Persona.hasOne(Supervisor, {
     foreignKey: {
         name: 'idPersona' 
     },
     sourceKey: 'id'
 });
 
-Estudiante.belongsTo(Persona, {
+Supervisor.belongsTo(Persona, {
     foreignKey: {
         name: 'idPersona' 
     },

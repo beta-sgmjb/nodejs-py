@@ -32,14 +32,12 @@ export const UsuarioRol = sequelize.define('usuarioRoles', {
 });
 
 Usuario.belongsToMany(Rol, {
-    as: 'roles',
     through: 'usuarioRoles',
     foreignKey: 'idUsuario',
     otherKey: 'idRol'
 });
 
 Rol.belongsToMany(Usuario, {
-    as: 'usuarios',
     through: 'usuarioRoles',
     foreignKey: 'idRol',
     otherKey: 'idUsuario'

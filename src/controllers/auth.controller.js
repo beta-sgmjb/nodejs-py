@@ -2,7 +2,6 @@ import { Usuario } from '../models/Usuario.js';
 import { Rol } from '../models/Rol.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { UsuarioRol } from '../models/UsuarioRol.js';
 
 export const signIn = (req, res) => {
     const { email, password } = req.body;
@@ -14,8 +13,6 @@ export const signIn = (req, res) => {
         if (!usuario) {
             res.status(404).json({ msg: "Usuario no existe..." })
         } else {
-
-
             if (bcrypt.compareSync(password, usuario.password)) {
                 let token = jwt.sign({ usuario: usuario }, "secret", {
                     expiresIn: "7d"
@@ -39,6 +36,7 @@ export const signIn = (req, res) => {
                         dataUsuario
                     });
                 });
+
             } else {
                 res.status(401).json({ msg: "Contraseña incorrecta..." })
             }
@@ -91,6 +89,3 @@ export const getUsuarios = async (req, res) => {
         return res.status(500).json({ msg: error.message })
     }
 }
-
-
-

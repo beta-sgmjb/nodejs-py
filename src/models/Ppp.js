@@ -24,7 +24,6 @@ export const Ppp = sequelize.define('ppps', {
 });
 
 Estudiante.hasOne(Ppp, {
-    as: 'practicante',
     foreignKey: {
         name: 'idEstudiante' 
     },
@@ -32,7 +31,6 @@ Estudiante.hasOne(Ppp, {
 });
 
 Ppp.belongsTo(Estudiante, {
-    as: 'ppps',
     foreignKey: {
         name: 'idEstudiante' 
     },

@@ -5,6 +5,12 @@ import './models/Usuario.js';
 import './models/Ppp.js';
 import './models/Estudiante.js';
 import './models/UsuarioRol.js';
+import './models/Persona.js';
+import './models/Empresa.js';
+import './models/TipoEmpresa.js';
+import './models/Supervisor.js';
+import './models/DocF.js';
+import './models/DocS.js';
 
 async function main() {
     try {
