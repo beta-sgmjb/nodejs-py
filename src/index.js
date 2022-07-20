@@ -1,10 +1,8 @@
 import app from "./app.js";
 import { sequelize } from './db/db.js';
-import './models/Rol.js';
 import './models/Usuario.js';
 import './models/Ppp.js';
 import './models/Estudiante.js';
-import './models/UsuarioRol.js';
 import './models/Persona.js';
 import './models/Empresa.js';
 import './models/TipoEmpresa.js';

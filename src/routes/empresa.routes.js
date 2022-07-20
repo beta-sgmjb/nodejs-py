@@ -6,8 +6,8 @@ const router = Router();
 
 router.get('/api/empresas', auth, getEmpresas);
 router.post('/api/empresas', auth, createEmpresa);
-router.put('/api/empresas/:id', auth, updateEmpresa);
-router.delete('/api/empresas/:id', auth, deleteEmpresa);
-router.get('/api/empresas/:id', auth, getEmpresa);
+router.put('/api/empresas/:id', auth, findEmpresa, updateEmpresa);
+router.delete('/api/empresas/:id', auth, findEmpresa, deleteEmpresa);
+router.get('/api/empresas/:id', auth, findEmpresa, getEmpresa);
 
 export default router;

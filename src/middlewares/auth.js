@@ -10,7 +10,7 @@ export const auth = (req, res, next) => {
             if (err) {
                 res.status(500).json({ msg: "Ha ocurrido un problema en la decodificación del token", err });
             } else {
-                Usuario.findByPk(decoded.usuario.id, { include: "roles" }).then(usuario => {
+                Usuario.findByPk(decoded.usuario.id).then(usuario => {
                     req.usuario = usuario;
                 });
                 next();

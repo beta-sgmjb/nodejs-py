@@ -1,9 +1,8 @@
 import express from 'express';
 import pppRoutes from './routes/ppp.routes.js';
+import personaRoutes from './routes/persona.routes.js';
 import usuarioRoutes from './routes/usuario.routes.js';
 import estudianteRoutes from './routes/estudiante.routes.js'
-import rolRoutes from './routes/rol.routes.js';
-import usuarioRolRoutes from './routes/usuarioRoles.routes.js';
 import cors from 'cors';
 
 const app = express();
@@ -13,8 +12,7 @@ app.use(cors());
 
 app.use(pppRoutes);
 app.use(usuarioRoutes);
+app.use(personaRoutes);
 app.use(estudianteRoutes);
-app.use(rolRoutes);
-app.use(usuarioRolRoutes);
 
 export default app;

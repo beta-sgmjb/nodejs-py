@@ -6,8 +6,8 @@ const router = Router();
 
 router.get('/api/estudiantes', auth, getEstudiantes);
 router.post('/api/estudiantes', auth, createEstudiante);
-router.put('/api/estudiantes/:id', auth, updateEstudiante);
-router.delete('/api/estudiantes/:id', auth, deleteEstudiante);
-router.get('/api/estudiantes/:id', auth, getEstudiante);
+router.put('/api/estudiantes/:id', auth, findEstudiante, updateEstudiante);
+router.delete('/api/estudiantes/:id', auth, findEstudiante, deleteEstudiante);
+router.get('/api/estudiantes/:id', auth, findEstudiante, getEstudiante);
 
 export default router;

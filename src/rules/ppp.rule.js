@@ -1,5 +1,3 @@
-import { verificarRol } from "../models/Usuario.js";
-
 export const showPppRule = (req, res, next) => {
     if (req.usuario.id === req.ppp.idEstudiante || verificarRol(req.usuario.roles) == "1") {
         next();
